@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Beautiful Girlfriend ✨</title>
+    <style>
+        :root {
+            --primary-love: #ff4d6d;
+            --secondary-glow: #fee440;
+            --text-dark: #333;
+            --bg-color: #faf0f1;
+            --font-special: 'Pacifico', cursive;
+            --font-main: 'Poppins', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden; /* Important for parallax and full screen effects */
+        }
+
+        /* Parallax Background Layers */
+        .background-wrap {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .layer {
+            position: absolute;
+            width: 110%; /* Larger than screen to allow for movement */
+            height: 110%;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.1s ease-out; /* Smooth movement */
+        }
+
+        /* DUMMY LAYER IMAGES - REPLACE THESE URLs! */
+        .layer-1 {
+            background-image: url('https://source.unsplash.com/random/1920x1080?pattern,love'); 
+            opacity: 0.15;
+        }
+        .layer-2 {
+            background-image: url('https://source.unsplash.com/random/1920x1080?hearts,sparkles'); 
+            opacity: 0.1;
+        }
+
+        /* Main Card Styling */
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px); /* Frosted glass effect */
+            padding: 50px;
+            border-radius: 25px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 550px;
+            width: 85%;
+            opacity: 0; /* Animate entry */
+            transform: translateY(20px);
+            animation: fadeInSlideUp 1s ease forwards;
+            position: relative;
+        }
+
+        @keyframes fadeInSlideUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .personal-heading {
+            color: var(--primary-love);
+            font-family: var(--font-special);
+            font-size: 3.5em;
+            margin-bottom: 20px;
+        }
+
+        #typewriter-text {
+            font-size: 1.3em;
+            line-height: 1.6;
+            min-height: 120px; /* Preserve space for dynamic typing */
+        }
+
+        .reveal-btn {
+            margin-top: 30px;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--primary-love), #ff7e8e);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
+        }
+
+        .reveal-btn:hover {
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 77, 109, 0.6);
+        }
+
+        .hidden { display: none; }
+        #secret-message {
+            margin-top: 30px;
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #2c3e50;
+            background: linear-gradient(90deg, #ff4d6d, #fee440);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glowPulse 2s infinite; /* Pulsing text effect */
+        }
+
+        @keyframes glowPulse {
+            0% { text-shadow: 0 0 5px rgba(254, 228, 64, 0.2); }
+            50% { text-shadow: 0 0 15px rgba(254, 228, 64, 0.6); }
+            100% { text-shadow: 0 0 5px rgba(254, 228, 64, 0.2); }
+        }
+
+        /* Lottie Animation container */
+        #lottie-container {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 20px auto;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.6/lottie.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="background-wrap" id="backgroundWrap">
+        <div class="layer layer-1" data-depth="0.1"></div>
+        <div class="layer layer-2" data-depth="0.2"></div>
+    </div>
+
+    <div class="container" id="mainCard">
+        <div id="lottie-container"></div> <h1 class="personal-heading">Hey Beautiful ❤️</h1>
+        <p id="typewriter-text"></p> <button class="reveal-btn" onclick="revealMessage()">Tap for a Secret Message 🤫</button>
+        <div id="secret-message" class="hidden">I Love You More Than Anything! 🥰</div>
+    </div>
+
+    <script>
+        // 1. Initial Surprise: Confetti Pop
+        confetti({
+            particleCount: 150,
+            spread: 180,
+            origin: { y: 0.6 }
+        });
+
+        // 2. Complex Animation: Load Lottie Vector
+        lottie.loadAnimation({
+            container: document.getElementById('lottie-container'), 
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            path: 'https://assets7.lottiefiles.com/packages/lf20_96b4l5sw.json' // Replace with other Lottie URLs if desired
+        });
+
+        // 3. Game Element: Dynamic Typewriter Effect
+        const textElement = document.getElementById('typewriter-text');
+        // PERSONALIZE THIS MESSAGE!
+        const message = "You're the kindest, most beautiful person I know. Every day you inspire me. This simple code is just a small way to say how special you are to me.";
+        let index = 0;
+
+        function typeWriter() {
+            if (index < message.length) {
+                textElement.innerHTML += message.charAt(index);
+                index++;
+                setTimeout(typeWriter, 40); // Controls typing speed (lower is faster)
+            }
+        }
+        // Start typing after the entry animation is done
+        setTimeout(typeWriter, 1200);
+
+        // 4. Parallax Background Interaction
+        document.addEventListener('mousemove', function(e) {
+            let x = e.clientX / window.innerWidth - 0.5;
+            let y = e.clientY / window.innerHeight - 0.5;
+            
+            const layers = document.querySelectorAll('.layer');
+            layers.forEach(layer => {
+                let depth = layer.getAttribute('data-depth');
+                let moveX = x * depth * 50 + '%'; // Adjust movement intensity
+                let moveY = y * depth * 50 + '%';
+                layer.style.transform = `translate(${moveX}, ${moveY})`;
+            });
+        });
+
+        // 5. Interaction: Reveal Secret Message
+        function revealMessage() {
+            document.getElementById('secret-message').classList.remove('hidden');
+            document.querySelector('.reveal-btn').classList.add('hidden'); // Hide the button
+            
+            // Bonus Surprise: Small Confetti on Reveal
+            confetti({ particleCount: 50, spread: 60 });
+        }
+    </script>
+
+</body>
+</html>
